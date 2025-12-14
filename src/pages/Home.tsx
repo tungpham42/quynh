@@ -33,7 +33,7 @@ const Home: React.FC = () => {
               title={
                 <div style={{ display: "flex", alignItems: "center" }}>
                   <Tag color="blue">Học phần {index + 1}</Tag>
-                  <span style={{ fontSize: "16px" }}>
+                  <span style={{ fontSize: "16px", marginLeft: 8 }}>
                     {item.title.split(":")[1]}
                   </span>
                 </div>
