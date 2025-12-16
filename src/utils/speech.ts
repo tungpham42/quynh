@@ -1,10 +1,17 @@
 export const speak = (text: string) => {
-  if ("speechSynthesis" in window) {
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = "zh-CN"; // Set ngôn ngữ là Tiếng Trung
-    utterance.rate = 0.8; // Tốc độ đọc chậm lại một chút cho người học
-    window.speechSynthesis.speak(utterance);
-  } else {
-    alert("Trình duyệt của bạn không hỗ trợ phát âm.");
+  if (!text) return;
+
+  try {
+    const url = `/.netlify/functions/tts?text=${encodeURIComponent(text)}`;
+
+    // Create a new Audio object and play it
+    const audio = new Audio(url);
+
+    audio.play().catch((error) => {
+      console.error("Audio playback failed:", error);
+      alert("Không thể phát âm thanh.");
+    });
+  } catch (error) {
+    console.error("Error initializing audio:", error);
   }
 };
